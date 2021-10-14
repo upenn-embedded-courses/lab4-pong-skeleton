@@ -1,1 +1,1 @@
-# lab4-pong-skeleton
+# lab4-game-skeleton
