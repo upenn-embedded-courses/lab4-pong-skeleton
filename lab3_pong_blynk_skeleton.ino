@@ -74,14 +74,14 @@ BLYNK_CONNECTED()
 
 BLYNK_WRITE(V0) {
   int up = param.asInt();
-
+  digitalWrite(16, up);
 }
 
 void setup()
 {
   // Debug console
   Serial.begin(9600);
-
+  pinMode(16, OUTPUT);
   Blynk.begin(auth, ssid, pass);
 }
 
