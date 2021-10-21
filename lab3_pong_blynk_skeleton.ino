@@ -34,11 +34,20 @@
   Feel free to apply it to any other example. It's simple!
  *************************************************************/
 
+/**
+ * FILL OUT THE FOLLOWING BASED ON YOUR TEMPLATE INFORMATION
+ * 1. BLYNK_TEMPLATE_ID (line 48)
+ * 2. BLYNK_DEVICE_NAME (line 49)
+ * 3. BLYNK_AUTH_TOKEN (line 50)
+ */
+
 /* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
 
 /* Fill-in your Template ID (only if using Blynk.Cloud) */
-//#define BLYNK_TEMPLATE_ID   "YourTemplateID"
+#define BLYNK_TEMPLATE_ID           "TMPLiq65GRUZ"  // FILL THIS OUT
+#define BLYNK_DEVICE_NAME           "Quickstart Device" // FILL THIS OUT
+#define BLYNK_AUTH_TOKEN            "XOu4o_9Y1LsmIsPbZqAAUCapeIGkQEMC" // FILL THIS OUT
 
 
 #include <ESP8266WiFi.h>
@@ -46,29 +55,34 @@
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
-char auth[] = ""; // FILL THIS OUT
+char auth[] = BLYNK_AUTH_TOKEN;
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
 char ssid[] = "AirPennNet-Device";
 char pass[] = "penn1740wifi";
 
-// V0 should be the virtual pin number that you use.
-BLYNK_WRITE(V0){
-  int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
 
-  // process received value
+// This function is called every time the device is connected to the Blynk.Cloud
+BLYNK_CONNECTED()
+{
+  // Change Web Link Button message to "Congratulations!"
+  Blynk.setProperty(V3, "offImageUrl", "https://static-image.nyc3.cdn.digitaloceanspaces.com/general/fte/congratulations.png");
+  Blynk.setProperty(V3, "onImageUrl",  "https://static-image.nyc3.cdn.digitaloceanspaces.com/general/fte/congratulations_pressed.png");
+  Blynk.setProperty(V3, "url", "https://docs.blynk.io/en/getting-started/what-do-i-need-to-blynk/how-quickstart-device-was-made");
+}
+
+BLYNK_WRITE(V0) {
+  int up = param.asInt();
+
 }
 
 void setup()
 {
   // Debug console
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   Blynk.begin(auth, ssid, pass);
-  // You can also specify server:
-  //Blynk.begin(auth, ssid, pass, "blynk.cloud", 80);
-  //Blynk.begin(auth, ssid, pass, IPAddress(192,168,1,100), 8080);
 }
 
 void loop()
